@@ -4,10 +4,8 @@ import java.io.Serializable;
 
 public class Model implements Serializable {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -2921830326001375227L;
+    
     private Long id;
 
     public Model() {
