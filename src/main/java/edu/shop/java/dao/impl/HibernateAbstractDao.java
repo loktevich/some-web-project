@@ -1,50 +1,60 @@
 package edu.shop.java.dao.impl;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import edu.shop.java.dao.accessors.DatabaseDatasourceAccessor;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import edu.shop.java.model.Model;
 
-public abstract class HibernateAbstractDao<T extends Model> extends DatabaseDatasourceAccessor {
+public abstract class HibernateAbstractDao<T extends Model> {
 
-    public List<T> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    private Class<T> clazz;
+
+    @SuppressWarnings("unchecked")
+    public HibernateAbstractDao() {
+        final ParameterizedType superClass = (ParameterizedType) getClass()
+                .getGenericSuperclass();
+        this.clazz = (Class<T>) ((ParameterizedType) superClass)
+                .getActualTypeArguments()[0];
     }
 
+    @SuppressWarnings("unchecked")
+    public List<T> getAll() {
+        @SuppressWarnings("deprecation")
+        Criteria criteria = getSession().createCriteria(this.clazz);
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        return criteria.list();
+    }
+
+    @SuppressWarnings("unchecked")
     public T getById(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        @SuppressWarnings("deprecation")
+        Criteria criteria = getSession().createCriteria(this.clazz);
+        criteria.add(Restrictions.eq("id", id));
+        return (T) criteria.uniqueResult();
     }
 
     public void add(T model) {
-        // TODO Auto-generated method stub
-
+        getSession().save(model);
     }
 
     public void update(T model) {
-        // TODO Auto-generated method stub
-
-    }
-
-    public void remove(Long id) {
-        // TODO Auto-generated method stub
-
+        getSession().merge(model);
     }
 
     public void remove(T model) {
-        // TODO Auto-generated method stub
-
-    }
-    
-    @Override
-    public String getHost() {
-        return null;
+        getSession().delete(model);
     }
 
-    @Override
-    public int getPort() {
-        return 0;
+    public Session getSession() {
+        return this.sessionFactory.getCurrentSession();
     }
-
 }
