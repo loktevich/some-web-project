@@ -38,7 +38,7 @@
         <junit.version>4.12</junit.version>
 
         <!-- SPRINGFRAMEWORK -->
-        <springframework.version>4.2.3.RELEASE</springframework.version>
+        <springframework.version>4.2.0.RELEASE</springframework.version>
 
         <!-- DATABASE -->
         <mysql-connector-java.version>6.0.6</mysql-connector-java.version>
