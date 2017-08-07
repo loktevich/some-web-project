@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.shop.java.model.Model;
 
-public interface ItemDAO<T extends Model> {
+public interface ItemDao<T extends Model> {
 
     public List<T> getAll();
 
