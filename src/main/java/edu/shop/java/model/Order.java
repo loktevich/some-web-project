@@ -2,7 +2,11 @@ package edu.shop.java.model;
 
 import java.util.GregorianCalendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,9 +15,15 @@ public class Order extends Model {
 
     private static final long serialVersionUID = -8010600775923001969L;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
+    @Column(name = "date")
     private GregorianCalendar calendar;
 
     public Order() {
