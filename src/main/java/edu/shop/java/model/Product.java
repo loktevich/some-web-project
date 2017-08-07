@@ -2,7 +2,9 @@ package edu.shop.java.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,13 +13,19 @@ public class Product extends Model {
 
     private static final long serialVersionUID = 4602984400893493620L;
 
+    @Column(name = "title", length = 50)
     private String title;
+    
+    @Column(name = "description", length = 1024)
     private String description;
 
+    @Column(name = "count")
     private int count;
 
+    @Column(name = "price")
     private BigDecimal price;
 
+    @ManyToOne
     private ProductCategory productCategory;
 
     public Product() {
