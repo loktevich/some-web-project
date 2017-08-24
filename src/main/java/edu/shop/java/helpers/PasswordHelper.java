@@ -46,9 +46,9 @@ public class PasswordHelper implements PasswordEncoder {
         return hexString.toString();
     }
 
-    private static void main(String[] args) {
-        System.out.println(hash("admin"));
-        System.out.println(hash("user"));
+    public static void main(String[] args) {
+        System.out.println(hash("admin")); //21232f297a57a5a743894a0e4a801fc3
+        System.out.println(hash("user")); //ee11cbb19052e40b07aac0ca060c23ee
     }
 
     @Override
