@@ -91,7 +91,7 @@
         <security:intercept-url pattern="/product/list.html"
             access="isAuthenticated()" />
         <security:logout logout-url="/logout.htm" />
-        <security:remember-me user-service-ref="userAuthorityService"
+        <security:remember-me user-service-ref="userService"
             key="shop_key" />
     </security:http>
 
