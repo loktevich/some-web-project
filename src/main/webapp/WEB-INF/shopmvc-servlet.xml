@@ -97,7 +97,7 @@
 
     <security:authentication-manager>
         <security:authentication-provider
-            user-service-ref="userAuthorityService">
+            user-service-ref="userService">
             <security:password-encoder ref="passwordHelper" />
         </security:authentication-provider>
     </security:authentication-manager>
